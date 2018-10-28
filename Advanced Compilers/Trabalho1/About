@@ -1,0 +1,4 @@
+This is the first part of a TACL language compiler.
+In this part, a TACL language parsing tree is recieved as input and processed to be tranformed into a Intermideate Representation language.
+
+Author: David Parreira
