@@ -1,0 +1,4 @@
+This is the second part of a TACL language compiler.
+In this part we transform the Intermediate Representation into MIPS Assembly.
+
+Author: David Parreira
