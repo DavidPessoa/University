@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Fazer Reserva</title>
+        <link href="../css/sheet.css" rel="stylesheet" type="text/css"  />
+    </h:head>
+    <h:body>
+       
+        
+        <h1></h1>
+        <h2> Reserva</h2>
+        <p></p>
+        <h:form>                       
+                    <!-- serviço fazer reserva--> 
+                    <h:panelGrid  border="1" bodyrows="1" columns="2"  style="width: 360px " bgcolor="white" >
+                       <h:outputText value="Nome"></h:outputText> 
+                       <h:inputText id="nome" value="#{pedidoReserva.nome}" requiredMessage="Nome é obrigatório" required="true"></h:inputText>
+                    </h:panelGrid>
+                    <h:panelGrid border="1" bodyrows="1" columns="1" style="width: 360px" bgcolor="white">
+                         <h:selectOneRadio id="subscriptions" value="#{pedidoReserva.nomeEspaco}" requiredMessage="Indicar o espaço é obrigatório" required="true">
+                           <f:selectItem id="item1" itemLabel="Futsal" itemValue="futsal" />
+                           <f:selectItem id="item2" itemLabel="Padel" itemValue="padel" />
+                           <f:selectItem id="item3" itemLabel="Ténis" itemValue="tenis" />
+                       </h:selectOneRadio>
+                    </h:panelGrid>
+                    <h:panelGrid border="1" bodyrows="5" columns="2" style="width: 360px" bgcolor="white">
+                       <h:outputText value="Data Inicio (ano-mes-dia h:min)"></h:outputText>
+                       <h:inputText value="#{pedidoReserva.dataInicio}" requiredMessage="Data Inicio é obrigatória" required="true">
+                           <f:validator validatorId="pedidoReserva"></f:validator>
+                           <f:attribute name="dataf" value="#{dataf}"></f:attribute>
+                       </h:inputText>
+                       <h:outputText value="Data Fim (ano-mes-dia h:min)"></h:outputText>
+                       <h:inputText value="#{pedidoReserva.dataFim}" id="dataf" binding="#{dataf}" requiredMessage="Data Fim é obrigatória" required="true" ></h:inputText>
+                       <h:outputText value="Telefone"></h:outputText>
+                       <h:inputText value="#{pedidoReserva.telefone}" validatorMessage="O número de telefone tem de possuir 9 digitos"> 
+                           <f:validateLength  minimum = "9" maximum = "9" />
+                       </h:inputText>
+                       <h:outputText value="Número Utilizadores"></h:outputText>
+                       <h:inputText value="#{pedidoReserva.numUtilizadores}" validatorMessage="Aceitamos entre 1 e 20 utilizadores"> 
+                           <f:validateLength  minimum = "1" maximum = "20" />
+                       </h:inputText>
+                       
+                       <h:outputText value="Custo estimado"></h:outputText>
+                       <h:outputText value="#{pedidoReserva.custoEstimado}"></h:outputText>                
+                    </h:panelGrid>
+                    <h:commandButton value="efetuar reserva" action="#{pedidoReserva.setResposta()}"></h:commandButton>
+                    <p></p>
+                    <h:outputText value="#{pedidoReserva.resposta}"></h:outputText>
+        </h:form>
+        <a href="/ResWeb">Voltar</a>
+      
+    </h:body>
+</html>
+

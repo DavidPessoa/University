@@ -1,0 +1,1284 @@
+Terminals unused in grammar
+
+   AT
+   TEMP
+   A
+   G
+
+
+Grammar
+
+    0 $accept: program $end
+
+    1 program: function
+
+    2 function: moreFunctions
+    3         | moreDeclarations
+
+    4 moreDeclarations: PARE declaration PARD
+    5                 | PARE declaration PARD function
+
+    6 declaration: ID NAME FUN declType PARRE declArgs PARRD PARRE declArgs PARRD
+    7            | ID NAME VAR declType initialValue
+    8            | ID NAME VAR BOOL boolVal
+
+    9 declType: INT
+   10         | VOID
+   11         | REALTYPE
+
+   12 boolVal: TRUE
+   13        | FALSE
+   14        | %empty
+
+   15 initialValue: NUM
+   16             | REAL
+   17             | %empty
+
+   18 declArgs: arguments
+   19         | %empty
+
+   20 arguments: PARE moreArgDecl
+
+   21 moreArgDecl: declType NAME PARD
+   22            | declType NAME PARD arguments
+
+   23 moreFunctions: FUNCTION NAME body
+   24              | FUNCTION NAME body function
+
+   25 body: jLabel expression
+   26     | moreExpressions
+
+   27 moreExpressions: jLabel expression body
+
+   28 expression: id ARROW type op args
+   29           | CJUMP id COMMA L NUM COMMA L NUM
+   30           | JUMP L NUM
+   31           | id ARROW ITOR args
+   32           | id ARROW NOT args
+   33           | type RETURN args
+   34           | id ARROW type CALL NAME COMMA PARRE args PARRD
+   35           | RETURN
+   36           | CALL NAME COMMA PARRE args PARRD
+   37           | type PRINT args
+   38           | id ARROW MOD args
+   39           | CALL NAME COMMA PARRE PARRD
+   40           | id ARROW type CALL NAME COMMA PARRE PARRD
+
+   41 id: T NUM
+   42   | FP NUM
+   43   | NAME
+
+   44 args: id
+   45     | id COMMA args
+   46     | NUM
+   47     | REAL
+
+   48 op: SUB
+   49   | MUL
+   50   | ADD
+   51   | DIV
+   52   | LT
+   53   | EQ
+   54   | LSTORE
+   55   | ASTORE
+   56   | GSTORE
+   57   | ALOAD
+   58   | GLOAD
+   59   | LLOAD
+   60   | VALUE
+   61   | COPY
+   62   | NE
+   63   | LE
+   64   | INV
+
+   65 jLabel: L NUM TWODOT
+   66       | %empty
+
+   67 type: I
+   68     | R
+   69     | B
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+NUM (258) 15 29 30 41 42 46 65
+REAL (259) 16 47
+NAME (260) 6 7 8 21 22 23 24 34 36 39 40 43
+FUNCTION (261) 23 24
+AT (262)
+TEMP (263)
+ARROW (264) 28 31 32 34 38 40
+COMMA (265) 29 34 36 39 40 45
+JUMP (266) 30
+RETURN (267) 33 35
+FP (268) 42
+A (269)
+G (270)
+L (271) 29 30 65
+PARRE (272) 6 34 36 39 40
+PARRD (273) 6 34 36 39 40
+VALUE (274) 60
+LSTORE (275) 54
+ASTORE (276) 55
+GSTORE (277) 56
+LLOAD (278) 59
+ALOAD (279) 57
+GLOAD (280) 58
+MUL (281) 49
+SUB (282) 48
+ADD (283) 50
+DIV (284) 51
+MOD (285) 38
+INV (286) 64
+EQ (287) 53
+LT (288) 52
+ITOR (289) 31
+NOT (290) 32
+COPY (291) 61
+CJUMP (292) 29
+CALL (293) 34 36 39 40
+I (294) 67
+T (295) 41
+R (296) 68
+TWODOT (297) 65
+PRINT (298) 37
+FUN (299) 6
+VOID (300) 10
+ID (301) 6 7 8
+INT (302) 9
+VAR (303) 7 8
+PARD (304) 4 5 21 22
+PARE (305) 4 5 20
+REALTYPE (306) 11
+B (307) 69
+BOOL (308) 8
+TRUE (309) 12
+FALSE (310) 13
+NE (311) 62
+LE (312) 63
+
+
+Nonterminals, with rules where they appear
+
+$accept (58)
+    on left: 0
+program (59)
+    on left: 1, on right: 0
+function (60)
+    on left: 2 3, on right: 1 5 24
+moreDeclarations (61)
+    on left: 4 5, on right: 3
+declaration (62)
+    on left: 6 7 8, on right: 4 5
+declType (63)
+    on left: 9 10 11, on right: 6 7 21 22
+boolVal (64)
+    on left: 12 13 14, on right: 8
+initialValue (65)
+    on left: 15 16 17, on right: 7
+declArgs (66)
+    on left: 18 19, on right: 6
+arguments (67)
+    on left: 20, on right: 18 22
+moreArgDecl (68)
+    on left: 21 22, on right: 20
+moreFunctions (69)
+    on left: 23 24, on right: 2
+body (70)
+    on left: 25 26, on right: 23 24 27
+moreExpressions (71)
+    on left: 27, on right: 26
+expression (72)
+    on left: 28 29 30 31 32 33 34 35 36 37 38 39 40, on right: 25 27
+id (73)
+    on left: 41 42 43, on right: 28 29 31 32 34 38 40 44 45
+args (74)
+    on left: 44 45 46 47, on right: 28 31 32 33 34 36 37 38 45
+op (75)
+    on left: 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64, on right:
+    28
+jLabel (76)
+    on left: 65 66, on right: 25 27
+type (77)
+    on left: 67 68 69, on right: 28 33 34 37 40
+
+
+State 0
+
+    0 $accept: . program $end
+
+    FUNCTION  shift, and go to state 1
+    PARE      shift, and go to state 2
+
+    program           go to state 3
+    function          go to state 4
+    moreDeclarations  go to state 5
+    moreFunctions     go to state 6
+
+
+State 1
+
+   23 moreFunctions: FUNCTION . NAME body
+   24              | FUNCTION . NAME body function
+
+    NAME  shift, and go to state 7
+
+
+State 2
+
+    4 moreDeclarations: PARE . declaration PARD
+    5                 | PARE . declaration PARD function
+
+    ID  shift, and go to state 8
+
+    declaration  go to state 9
+
+
+State 3
+
+    0 $accept: program . $end
+
+    $end  shift, and go to state 10
+
+
+State 4
+
+    1 program: function .
+
+    $default  reduce using rule 1 (program)
+
+
+State 5
+
+    3 function: moreDeclarations .
+
+    $default  reduce using rule 3 (function)
+
+
+State 6
+
+    2 function: moreFunctions .
+
+    $default  reduce using rule 2 (function)
+
+
+State 7
+
+   23 moreFunctions: FUNCTION NAME . body
+   24              | FUNCTION NAME . body function
+
+    L  shift, and go to state 11
+
+    $default  reduce using rule 66 (jLabel)
+
+    body             go to state 12
+    moreExpressions  go to state 13
+    jLabel           go to state 14
+
+
+State 8
+
+    6 declaration: ID . NAME FUN declType PARRE declArgs PARRD PARRE declArgs PARRD
+    7            | ID . NAME VAR declType initialValue
+    8            | ID . NAME VAR BOOL boolVal
+
+    NAME  shift, and go to state 15
+
+
+State 9
+
+    4 moreDeclarations: PARE declaration . PARD
+    5                 | PARE declaration . PARD function
+
+    PARD  shift, and go to state 16
+
+
+State 10
+
+    0 $accept: program $end .
+
+    $default  accept
+
+
+State 11
+
+   65 jLabel: L . NUM TWODOT
+
+    NUM  shift, and go to state 17
+
+
+State 12
+
+   23 moreFunctions: FUNCTION NAME body .
+   24              | FUNCTION NAME body . function
+
+    FUNCTION  shift, and go to state 1
+    PARE      shift, and go to state 2
+
+    $default  reduce using rule 23 (moreFunctions)
+
+    function          go to state 18
+    moreDeclarations  go to state 5
+    moreFunctions     go to state 6
+
+
+State 13
+
+   26 body: moreExpressions .
+
+    $default  reduce using rule 26 (body)
+
+
+State 14
+
+   25 body: jLabel . expression
+   27 moreExpressions: jLabel . expression body
+
+    NAME    shift, and go to state 19
+    JUMP    shift, and go to state 20
+    RETURN  shift, and go to state 21
+    FP      shift, and go to state 22
+    CJUMP   shift, and go to state 23
+    CALL    shift, and go to state 24
+    I       shift, and go to state 25
+    T       shift, and go to state 26
+    R       shift, and go to state 27
+    B       shift, and go to state 28
+
+    expression  go to state 29
+    id          go to state 30
+    type        go to state 31
+
+
+State 15
+
+    6 declaration: ID NAME . FUN declType PARRE declArgs PARRD PARRE declArgs PARRD
+    7            | ID NAME . VAR declType initialValue
+    8            | ID NAME . VAR BOOL boolVal
+
+    FUN  shift, and go to state 32
+    VAR  shift, and go to state 33
+
+
+State 16
+
+    4 moreDeclarations: PARE declaration PARD .
+    5                 | PARE declaration PARD . function
+
+    FUNCTION  shift, and go to state 1
+    PARE      shift, and go to state 2
+
+    $default  reduce using rule 4 (moreDeclarations)
+
+    function          go to state 34
+    moreDeclarations  go to state 5
+    moreFunctions     go to state 6
+
+
+State 17
+
+   65 jLabel: L NUM . TWODOT
+
+    TWODOT  shift, and go to state 35
+
+
+State 18
+
+   24 moreFunctions: FUNCTION NAME body function .
+
+    $default  reduce using rule 24 (moreFunctions)
+
+
+State 19
+
+   43 id: NAME .
+
+    $default  reduce using rule 43 (id)
+
+
+State 20
+
+   30 expression: JUMP . L NUM
+
+    L  shift, and go to state 36
+
+
+State 21
+
+   35 expression: RETURN .
+
+    $default  reduce using rule 35 (expression)
+
+
+State 22
+
+   42 id: FP . NUM
+
+    NUM  shift, and go to state 37
+
+
+State 23
+
+   29 expression: CJUMP . id COMMA L NUM COMMA L NUM
+
+    NAME  shift, and go to state 19
+    FP    shift, and go to state 22
+    T     shift, and go to state 26
+
+    id  go to state 38
+
+
+State 24
+
+   36 expression: CALL . NAME COMMA PARRE args PARRD
+   39           | CALL . NAME COMMA PARRE PARRD
+
+    NAME  shift, and go to state 39
+
+
+State 25
+
+   67 type: I .
+
+    $default  reduce using rule 67 (type)
+
+
+State 26
+
+   41 id: T . NUM
+
+    NUM  shift, and go to state 40
+
+
+State 27
+
+   68 type: R .
+
+    $default  reduce using rule 68 (type)
+
+
+State 28
+
+   69 type: B .
+
+    $default  reduce using rule 69 (type)
+
+
+State 29
+
+   25 body: jLabel expression .
+   27 moreExpressions: jLabel expression . body
+
+    L  shift, and go to state 11
+
+    $end      reduce using rule 25 (body)
+    FUNCTION  reduce using rule 25 (body)
+    PARE      reduce using rule 25 (body)
+    $default  reduce using rule 66 (jLabel)
+
+    body             go to state 41
+    moreExpressions  go to state 13
+    jLabel           go to state 14
+
+
+State 30
+
+   28 expression: id . ARROW type op args
+   31           | id . ARROW ITOR args
+   32           | id . ARROW NOT args
+   34           | id . ARROW type CALL NAME COMMA PARRE args PARRD
+   38           | id . ARROW MOD args
+   40           | id . ARROW type CALL NAME COMMA PARRE PARRD
+
+    ARROW  shift, and go to state 42
+
+
+State 31
+
+   33 expression: type . RETURN args
+   37           | type . PRINT args
+
+    RETURN  shift, and go to state 43
+    PRINT   shift, and go to state 44
+
+
+State 32
+
+    6 declaration: ID NAME FUN . declType PARRE declArgs PARRD PARRE declArgs PARRD
+
+    VOID      shift, and go to state 45
+    INT       shift, and go to state 46
+    REALTYPE  shift, and go to state 47
+
+    declType  go to state 48
+
+
+State 33
+
+    7 declaration: ID NAME VAR . declType initialValue
+    8            | ID NAME VAR . BOOL boolVal
+
+    VOID      shift, and go to state 45
+    INT       shift, and go to state 46
+    REALTYPE  shift, and go to state 47
+    BOOL      shift, and go to state 49
+
+    declType  go to state 50
+
+
+State 34
+
+    5 moreDeclarations: PARE declaration PARD function .
+
+    $default  reduce using rule 5 (moreDeclarations)
+
+
+State 35
+
+   65 jLabel: L NUM TWODOT .
+
+    $default  reduce using rule 65 (jLabel)
+
+
+State 36
+
+   30 expression: JUMP L . NUM
+
+    NUM  shift, and go to state 51
+
+
+State 37
+
+   42 id: FP NUM .
+
+    $default  reduce using rule 42 (id)
+
+
+State 38
+
+   29 expression: CJUMP id . COMMA L NUM COMMA L NUM
+
+    COMMA  shift, and go to state 52
+
+
+State 39
+
+   36 expression: CALL NAME . COMMA PARRE args PARRD
+   39           | CALL NAME . COMMA PARRE PARRD
+
+    COMMA  shift, and go to state 53
+
+
+State 40
+
+   41 id: T NUM .
+
+    $default  reduce using rule 41 (id)
+
+
+State 41
+
+   27 moreExpressions: jLabel expression body .
+
+    $default  reduce using rule 27 (moreExpressions)
+
+
+State 42
+
+   28 expression: id ARROW . type op args
+   31           | id ARROW . ITOR args
+   32           | id ARROW . NOT args
+   34           | id ARROW . type CALL NAME COMMA PARRE args PARRD
+   38           | id ARROW . MOD args
+   40           | id ARROW . type CALL NAME COMMA PARRE PARRD
+
+    MOD   shift, and go to state 54
+    ITOR  shift, and go to state 55
+    NOT   shift, and go to state 56
+    I     shift, and go to state 25
+    R     shift, and go to state 27
+    B     shift, and go to state 28
+
+    type  go to state 57
+
+
+State 43
+
+   33 expression: type RETURN . args
+
+    NUM   shift, and go to state 58
+    REAL  shift, and go to state 59
+    NAME  shift, and go to state 19
+    FP    shift, and go to state 22
+    T     shift, and go to state 26
+
+    id    go to state 60
+    args  go to state 61
+
+
+State 44
+
+   37 expression: type PRINT . args
+
+    NUM   shift, and go to state 58
+    REAL  shift, and go to state 59
+    NAME  shift, and go to state 19
+    FP    shift, and go to state 22
+    T     shift, and go to state 26
+
+    id    go to state 60
+    args  go to state 62
+
+
+State 45
+
+   10 declType: VOID .
+
+    $default  reduce using rule 10 (declType)
+
+
+State 46
+
+    9 declType: INT .
+
+    $default  reduce using rule 9 (declType)
+
+
+State 47
+
+   11 declType: REALTYPE .
+
+    $default  reduce using rule 11 (declType)
+
+
+State 48
+
+    6 declaration: ID NAME FUN declType . PARRE declArgs PARRD PARRE declArgs PARRD
+
+    PARRE  shift, and go to state 63
+
+
+State 49
+
+    8 declaration: ID NAME VAR BOOL . boolVal
+
+    TRUE   shift, and go to state 64
+    FALSE  shift, and go to state 65
+
+    $default  reduce using rule 14 (boolVal)
+
+    boolVal  go to state 66
+
+
+State 50
+
+    7 declaration: ID NAME VAR declType . initialValue
+
+    NUM   shift, and go to state 67
+    REAL  shift, and go to state 68
+
+    $default  reduce using rule 17 (initialValue)
+
+    initialValue  go to state 69
+
+
+State 51
+
+   30 expression: JUMP L NUM .
+
+    $default  reduce using rule 30 (expression)
+
+
+State 52
+
+   29 expression: CJUMP id COMMA . L NUM COMMA L NUM
+
+    L  shift, and go to state 70
+
+
+State 53
+
+   36 expression: CALL NAME COMMA . PARRE args PARRD
+   39           | CALL NAME COMMA . PARRE PARRD
+
+    PARRE  shift, and go to state 71
+
+
+State 54
+
+   38 expression: id ARROW MOD . args
+
+    NUM   shift, and go to state 58
+    REAL  shift, and go to state 59
+    NAME  shift, and go to state 19
+    FP    shift, and go to state 22
+    T     shift, and go to state 26
+
+    id    go to state 60
+    args  go to state 72
+
+
+State 55
+
+   31 expression: id ARROW ITOR . args
+
+    NUM   shift, and go to state 58
+    REAL  shift, and go to state 59
+    NAME  shift, and go to state 19
+    FP    shift, and go to state 22
+    T     shift, and go to state 26
+
+    id    go to state 60
+    args  go to state 73
+
+
+State 56
+
+   32 expression: id ARROW NOT . args
+
+    NUM   shift, and go to state 58
+    REAL  shift, and go to state 59
+    NAME  shift, and go to state 19
+    FP    shift, and go to state 22
+    T     shift, and go to state 26
+
+    id    go to state 60
+    args  go to state 74
+
+
+State 57
+
+   28 expression: id ARROW type . op args
+   34           | id ARROW type . CALL NAME COMMA PARRE args PARRD
+   40           | id ARROW type . CALL NAME COMMA PARRE PARRD
+
+    VALUE   shift, and go to state 75
+    LSTORE  shift, and go to state 76
+    ASTORE  shift, and go to state 77
+    GSTORE  shift, and go to state 78
+    LLOAD   shift, and go to state 79
+    ALOAD   shift, and go to state 80
+    GLOAD   shift, and go to state 81
+    MUL     shift, and go to state 82
+    SUB     shift, and go to state 83
+    ADD     shift, and go to state 84
+    DIV     shift, and go to state 85
+    INV     shift, and go to state 86
+    EQ      shift, and go to state 87
+    LT      shift, and go to state 88
+    COPY    shift, and go to state 89
+    CALL    shift, and go to state 90
+    NE      shift, and go to state 91
+    LE      shift, and go to state 92
+
+    op  go to state 93
+
+
+State 58
+
+   46 args: NUM .
+
+    $default  reduce using rule 46 (args)
+
+
+State 59
+
+   47 args: REAL .
+
+    $default  reduce using rule 47 (args)
+
+
+State 60
+
+   44 args: id .
+   45     | id . COMMA args
+
+    COMMA  shift, and go to state 94
+
+    $default  reduce using rule 44 (args)
+
+
+State 61
+
+   33 expression: type RETURN args .
+
+    $default  reduce using rule 33 (expression)
+
+
+State 62
+
+   37 expression: type PRINT args .
+
+    $default  reduce using rule 37 (expression)
+
+
+State 63
+
+    6 declaration: ID NAME FUN declType PARRE . declArgs PARRD PARRE declArgs PARRD
+
+    PARE  shift, and go to state 95
+
+    $default  reduce using rule 19 (declArgs)
+
+    declArgs   go to state 96
+    arguments  go to state 97
+
+
+State 64
+
+   12 boolVal: TRUE .
+
+    $default  reduce using rule 12 (boolVal)
+
+
+State 65
+
+   13 boolVal: FALSE .
+
+    $default  reduce using rule 13 (boolVal)
+
+
+State 66
+
+    8 declaration: ID NAME VAR BOOL boolVal .
+
+    $default  reduce using rule 8 (declaration)
+
+
+State 67
+
+   15 initialValue: NUM .
+
+    $default  reduce using rule 15 (initialValue)
+
+
+State 68
+
+   16 initialValue: REAL .
+
+    $default  reduce using rule 16 (initialValue)
+
+
+State 69
+
+    7 declaration: ID NAME VAR declType initialValue .
+
+    $default  reduce using rule 7 (declaration)
+
+
+State 70
+
+   29 expression: CJUMP id COMMA L . NUM COMMA L NUM
+
+    NUM  shift, and go to state 98
+
+
+State 71
+
+   36 expression: CALL NAME COMMA PARRE . args PARRD
+   39           | CALL NAME COMMA PARRE . PARRD
+
+    NUM    shift, and go to state 58
+    REAL   shift, and go to state 59
+    NAME   shift, and go to state 19
+    FP     shift, and go to state 22
+    PARRD  shift, and go to state 99
+    T      shift, and go to state 26
+
+    id    go to state 60
+    args  go to state 100
+
+
+State 72
+
+   38 expression: id ARROW MOD args .
+
+    $default  reduce using rule 38 (expression)
+
+
+State 73
+
+   31 expression: id ARROW ITOR args .
+
+    $default  reduce using rule 31 (expression)
+
+
+State 74
+
+   32 expression: id ARROW NOT args .
+
+    $default  reduce using rule 32 (expression)
+
+
+State 75
+
+   60 op: VALUE .
+
+    $default  reduce using rule 60 (op)
+
+
+State 76
+
+   54 op: LSTORE .
+
+    $default  reduce using rule 54 (op)
+
+
+State 77
+
+   55 op: ASTORE .
+
+    $default  reduce using rule 55 (op)
+
+
+State 78
+
+   56 op: GSTORE .
+
+    $default  reduce using rule 56 (op)
+
+
+State 79
+
+   59 op: LLOAD .
+
+    $default  reduce using rule 59 (op)
+
+
+State 80
+
+   57 op: ALOAD .
+
+    $default  reduce using rule 57 (op)
+
+
+State 81
+
+   58 op: GLOAD .
+
+    $default  reduce using rule 58 (op)
+
+
+State 82
+
+   49 op: MUL .
+
+    $default  reduce using rule 49 (op)
+
+
+State 83
+
+   48 op: SUB .
+
+    $default  reduce using rule 48 (op)
+
+
+State 84
+
+   50 op: ADD .
+
+    $default  reduce using rule 50 (op)
+
+
+State 85
+
+   51 op: DIV .
+
+    $default  reduce using rule 51 (op)
+
+
+State 86
+
+   64 op: INV .
+
+    $default  reduce using rule 64 (op)
+
+
+State 87
+
+   53 op: EQ .
+
+    $default  reduce using rule 53 (op)
+
+
+State 88
+
+   52 op: LT .
+
+    $default  reduce using rule 52 (op)
+
+
+State 89
+
+   61 op: COPY .
+
+    $default  reduce using rule 61 (op)
+
+
+State 90
+
+   34 expression: id ARROW type CALL . NAME COMMA PARRE args PARRD
+   40           | id ARROW type CALL . NAME COMMA PARRE PARRD
+
+    NAME  shift, and go to state 101
+
+
+State 91
+
+   62 op: NE .
+
+    $default  reduce using rule 62 (op)
+
+
+State 92
+
+   63 op: LE .
+
+    $default  reduce using rule 63 (op)
+
+
+State 93
+
+   28 expression: id ARROW type op . args
+
+    NUM   shift, and go to state 58
+    REAL  shift, and go to state 59
+    NAME  shift, and go to state 19
+    FP    shift, and go to state 22
+    T     shift, and go to state 26
+
+    id    go to state 60
+    args  go to state 102
+
+
+State 94
+
+   45 args: id COMMA . args
+
+    NUM   shift, and go to state 58
+    REAL  shift, and go to state 59
+    NAME  shift, and go to state 19
+    FP    shift, and go to state 22
+    T     shift, and go to state 26
+
+    id    go to state 60
+    args  go to state 103
+
+
+State 95
+
+   20 arguments: PARE . moreArgDecl
+
+    VOID      shift, and go to state 45
+    INT       shift, and go to state 46
+    REALTYPE  shift, and go to state 47
+
+    declType     go to state 104
+    moreArgDecl  go to state 105
+
+
+State 96
+
+    6 declaration: ID NAME FUN declType PARRE declArgs . PARRD PARRE declArgs PARRD
+
+    PARRD  shift, and go to state 106
+
+
+State 97
+
+   18 declArgs: arguments .
+
+    $default  reduce using rule 18 (declArgs)
+
+
+State 98
+
+   29 expression: CJUMP id COMMA L NUM . COMMA L NUM
+
+    COMMA  shift, and go to state 107
+
+
+State 99
+
+   39 expression: CALL NAME COMMA PARRE PARRD .
+
+    $default  reduce using rule 39 (expression)
+
+
+State 100
+
+   36 expression: CALL NAME COMMA PARRE args . PARRD
+
+    PARRD  shift, and go to state 108
+
+
+State 101
+
+   34 expression: id ARROW type CALL NAME . COMMA PARRE args PARRD
+   40           | id ARROW type CALL NAME . COMMA PARRE PARRD
+
+    COMMA  shift, and go to state 109
+
+
+State 102
+
+   28 expression: id ARROW type op args .
+
+    $default  reduce using rule 28 (expression)
+
+
+State 103
+
+   45 args: id COMMA args .
+
+    $default  reduce using rule 45 (args)
+
+
+State 104
+
+   21 moreArgDecl: declType . NAME PARD
+   22            | declType . NAME PARD arguments
+
+    NAME  shift, and go to state 110
+
+
+State 105
+
+   20 arguments: PARE moreArgDecl .
+
+    $default  reduce using rule 20 (arguments)
+
+
+State 106
+
+    6 declaration: ID NAME FUN declType PARRE declArgs PARRD . PARRE declArgs PARRD
+
+    PARRE  shift, and go to state 111
+
+
+State 107
+
+   29 expression: CJUMP id COMMA L NUM COMMA . L NUM
+
+    L  shift, and go to state 112
+
+
+State 108
+
+   36 expression: CALL NAME COMMA PARRE args PARRD .
+
+    $default  reduce using rule 36 (expression)
+
+
+State 109
+
+   34 expression: id ARROW type CALL NAME COMMA . PARRE args PARRD
+   40           | id ARROW type CALL NAME COMMA . PARRE PARRD
+
+    PARRE  shift, and go to state 113
+
+
+State 110
+
+   21 moreArgDecl: declType NAME . PARD
+   22            | declType NAME . PARD arguments
+
+    PARD  shift, and go to state 114
+
+
+State 111
+
+    6 declaration: ID NAME FUN declType PARRE declArgs PARRD PARRE . declArgs PARRD
+
+    PARE  shift, and go to state 95
+
+    $default  reduce using rule 19 (declArgs)
+
+    declArgs   go to state 115
+    arguments  go to state 97
+
+
+State 112
+
+   29 expression: CJUMP id COMMA L NUM COMMA L . NUM
+
+    NUM  shift, and go to state 116
+
+
+State 113
+
+   34 expression: id ARROW type CALL NAME COMMA PARRE . args PARRD
+   40           | id ARROW type CALL NAME COMMA PARRE . PARRD
+
+    NUM    shift, and go to state 58
+    REAL   shift, and go to state 59
+    NAME   shift, and go to state 19
+    FP     shift, and go to state 22
+    PARRD  shift, and go to state 117
+    T      shift, and go to state 26
+
+    id    go to state 60
+    args  go to state 118
+
+
+State 114
+
+   21 moreArgDecl: declType NAME PARD .
+   22            | declType NAME PARD . arguments
+
+    PARE  shift, and go to state 95
+
+    $default  reduce using rule 21 (moreArgDecl)
+
+    arguments  go to state 119
+
+
+State 115
+
+    6 declaration: ID NAME FUN declType PARRE declArgs PARRD PARRE declArgs . PARRD
+
+    PARRD  shift, and go to state 120
+
+
+State 116
+
+   29 expression: CJUMP id COMMA L NUM COMMA L NUM .
+
+    $default  reduce using rule 29 (expression)
+
+
+State 117
+
+   40 expression: id ARROW type CALL NAME COMMA PARRE PARRD .
+
+    $default  reduce using rule 40 (expression)
+
+
+State 118
+
+   34 expression: id ARROW type CALL NAME COMMA PARRE args . PARRD
+
+    PARRD  shift, and go to state 121
+
+
+State 119
+
+   22 moreArgDecl: declType NAME PARD arguments .
+
+    $default  reduce using rule 22 (moreArgDecl)
+
+
+State 120
+
+    6 declaration: ID NAME FUN declType PARRE declArgs PARRD PARRE declArgs PARRD .
+
+    $default  reduce using rule 6 (declaration)
+
+
+State 121
+
+   34 expression: id ARROW type CALL NAME COMMA PARRE args PARRD .
+
+    $default  reduce using rule 34 (expression)
